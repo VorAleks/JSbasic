@@ -2,104 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Homework2</title>
+  <title>Homework3</title>
 </head>
 <body>
 <!--
-Обязательное задание.
+Необязательное задание.
 
-Необходимо скопировать и вставить в данный скрипт все функции из 4 задания.
-Необходимо реализовать функцию:
-mathOperation(arg1, arg2, operation);
-Параметры:
-arg1 - первое число.
-arg2 - второе число.
-operation - строка, которая содержит один символ из: "+", "-", "*", "/".
-Функция mathOperation должна вернуть результат операции, который был передан в
-параметр operation для двух первых аргументов (arg1 и arg2).
-Функция mathOperation должна использовать для вычисления функции из 4 задания.
+Вывести с помощью цикла for числа от 0 до 9, НЕ используя тело цикла. То есть
+выглядеть должно примерно так:
 
-Примеры вызова функции:
-console.log(mathOperation(5, 3, "+")); // 8
-console.log(mathOperation(5, 3, ":)")); // NaN
+for(…){/* здесь пусто */}
 
-Функции mathOperation всегда передаются корректные числа, проверки на NaN,
-Infinity делать не нужно, однако, в случае если был передан некорректный
-аргумент в параметр operation, необходимо вернуть NaN.
-
-Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
+Вместо многоточия нужно записать нужные разделы.
+Помните, что в первом, втором и третьем раздела цикла можно не только писать
+условия или увеличивать счетчик, в этих разделах допустимы любые выражения,
+например вызовы функций.
 -->
 <script>
   "use strict";
 
-  /**
-   * Считает сумму переданных аргументов.
-   * @param {number} a Первое число.
-   * @param {number} b Второе число.
-   * @returns {number} Сумма чисел.
-   */
-   function add(a, b) {
-    return a + b;
+  for (let i = 0; loop(i); i++) {
+  
   }
 
-  /**
-   * Считает разницу переданных аргументов, вычитая из большего числа меньшее.
-   * @param {number} a Первое число.
-   * @param {number} b Второе число.
-   * @returns {number} Разница чисел.
-   */
-  function sub(a, b) {
-    if (a > b) {
-      return a - b;
-    }
-    return b - a; 
+  function loop(count) {
+    console.log(count);
+    return count < 9;
   }
-
-  /**
-   * Выполняет произведение переданных аргументов.
-   * @param {number} a Первый множитель.
-   * @param {number} b Второй множитель.
-   * @returns {number} Произведение чисел.
-   */
-  function mult(a, b) {
-    return a * b;
-  }
-
-  /**
-   * Выполняет деление переданных аргументов.
-   * @param {number} a Делимое.
-   * @param {number} b Делитель.
-   * @returns {number} Частное чисел.
-   */
-  function div(a, b) {
-    return a / b;
-  }
-  /**
-   * Выполняет математические операции +, -, *, / с переданными аргументами.
-   * @param {number} arg1 Первое число.
-   * @param {number} arg2 Второе число.
-   * @param {string} operation Строка с символом операции.
-   * @returns {number} Результат операции с аргументами.
-   */
-  function mathOperation(arg1, arg2, operation) {
-    if (operation === "+") {
-      return add(arg1, arg2);
-    } else if (operation === "-") {
-      return sub(arg1, arg2);
-    } else if (operation === "*") { 
-      return mult(arg1, arg2);
-    } else if (operation === "/") {
-      return div(arg1, arg2);
-    }
-    return NaN;
-  }
-
-  console.log(mathOperation(5, 3, "+")); // 8
-  console.log(mathOperation(5, 3, "-")); // 2
-  console.log(mathOperation(5, 3, "*")); // 15
-  console.log(mathOperation(5, 3, "/")); // 1,6666666
-  console.log(mathOperation(5, 3, ":)")); // NaN
-
 </script>
 </body>
 </html>
