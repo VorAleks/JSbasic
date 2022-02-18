@@ -2,126 +2,94 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Homework4.2</title>
+  <title>Homework5.2</title>
 </head>
 <body>
 <!--
 Обязательное задание.
 
-Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
-Необходимо создать функцию-конструктор/класс для поста в социальной сети.
-Названия: `PostES5` для es5 стиля и `PostES6` для es6 стиля.
-Пост должен хранить:
-1. Автора поста (имени достаточно).
-2. Текст поста.
-3. Дату и время последнего изменения поста.
-Данные автора поста и текст поста необходимо передавать при создании
-экземпляра объекта.
-Каждому экземпляру объекта должен быть доступен метод `edit`, который будет
-менять текст поста.
-
----
-
-Необходимо создать функцию-конструктор/класс для закрепленного поста в
-социальной сети.
-Названия: `AttachedPostES5` для es5 стиля и `AttachedPostES6` для es6 стиля.
-Закрепленный пост должен наследоваться от обычного поста.
-Данные автора поста и текст поста необходимо передавать при создании
-экземпляра объекта.
-Закрепленный пост должен иметь свойство `highlighted`, в котором по умолчанию
-будет лежать значение false (это свойство будет обозначать, будет ли наш
-закрепленный пост подсвечен).
-У экземпляров объекта закрепленного поста должен быть метод с названием
-`makeTextHighlighted`, который сделает так, чтобы наш пост стал подсвеченным
-(будет менять свойство `highlighted`).
-
----
-
-Подсказки:
-1. Задание сложное, советую делать по аналогии с примером на онлайн-занятии.
-2. Обратите внимание что пост хранит "дату и время последнего изменения
-поста", это значит что если пост кто-то изменит (например вызовет какой-то
-метод, который изменит что-то в посте), дата и время последнего изменения
-поста также должна измениться.
-3. Выполняйте все по порядку, не стоит пытаться сделать все сразу, иначе можно
-что-нибудь пропустить.
-4. Если непонятно условие - задайте вопрос.
+Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
+стирать, код с решением задачи пишем под комментарием.
 -->
+
+<p class="dropdown">Привет :)</p>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="menu dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+
 <script>
   "use strict";
 
-  function PostES5(name,text, dateChange) {
-    this.name = name;
-    this.text = text;
-    this.dateChange = new Date().toLocaleString();
-  }
- 
-  PostES5.prototype.edit = function (text) {
-    this.text = text;
-    this.dateChange = new Date().toLocaleString();
-  };
+  /*
+  1. Ко всем элементам, имеющим класс "dropdown-item" добавить еще один класс
+  "super-dropdown", необходимо использовать методы forEach и querySelectorAll и
+  свойство classList у элементов.
+   */
+  const arrEl = document.querySelectorAll('.dropdown-item');
+  arrEl.forEach((item) => {
+    item.classList.add('super-dropdown');
+  });
 
-  class PostES6 {
-    constructor(name, text, dateChange) {
-      this.name = name;
-      this.text = text;
-      this.dateChange = new Date().toLocaleString();
-    }
+  /*
+  2. У элемента с классом btn необходимо убрать класс "btn-secondary", если он
+  присутствует у этого элемента, либо добавить, если такого класса у элемента
+  не было.
+   */
+  const btnEl = document.querySelector('.btn');
+  btnEl.classList.toggle("btn-secondary");
 
-    edit(text) {
-      this.text = text;
-      this.dateChange = new Date().toLocaleString();
-    }
-  }
+  /*
+  3. Необходимо удалить класс "dropdown-menu" у элемента, у которого
+  присутствует класс "menu".
+   */
+  const divMenuEl = document.querySelector('.menu');
+  divMenuEl.classList.toggle('dropdown-menu', false);
 
-  const post1 = new PostES5('John', 'my first post');
-  const post2 = new PostES6('Smith', 'my first text');
+  /*
+  4. Используя метод insertAdjacentHTML добавьте после div'a с классом
+  "dropdown" следующую разметку:
+    <a href="#">link</a>
+   */
+  const divEl = document.querySelector('div.dropdown');
+  divEl.insertAdjacentHTML('afterend', '<a href="#">link</a>');
 
-  console.log(post1);
-  console.log(post2);
+  /*
+  5. У элемента с id "dropdownMenuButton" замените id на "superDropdown".
+   */
+   document.getElementById('dropdownMenuButton').id = 'superDropdown'; 
 
-  post1.edit('Change of my first post');
-  post2.edit('Change of my first text');
+  /*
+  6. Добавьте атрибут data-dd со значением 3 элементу у которого существует
+  атрибут "aria-labelledby" равный "dropdownMenuButton" используя dataset.
+   */
+  document.querySelector('[aria-labelledby = dropdownMenuButton]')
+    .dataset.dd = '3';
 
-  console.log(post1);
-  console.log(post2);
+  /*
+  7. Удалите атрибут type у элемента с классом "dropdown-toggle".
+   */
+  document.querySelector('.dropdown-toggle').removeAttribute('type');
 
-  function AttachedPostES5(name, text, highlighted) {
-    PostES5.call(this, name, text);
-    this.highlighted = false;
-  }
+  /*
+  8. Выведите в консоль все имеющиеся атрибуты и их значения тега у которого
+  есть все два класса btn и dropdown-toggle.
+  Вывод каждого атрибута и значений должен выглядеть следующим образом (пример):
+  Атрибут "class" содержит значение "btn btn-secondary dropdown-toggle"
+   */
+const atribEl = document.querySelector('.btn.dropdown-toggle');
+for (let index = 0; index < atribEl.attributes.length; index++) {
+  let attItem = atribEl.attributes[index];
+  console.dir(`Атрибут "${attItem.name}" содержит значение "${attItem.value}"`);
+}
 
-  AttachedPostES5.prototype = Object.create(PostES5.prototype);
-  AttachedPostES5.prototype.constructor = AttachedPostES5;
-
-  AttachedPostES5.prototype.makeTextHighlighted = function () {
-    this.highlighted = true;
-    this.dateChange = new Date().toLocaleString();
-  };
-
-  class AttachedPostES6 extends PostES6 {
-    constructor(name, text, highlighted) {
-      super(name, text);
-      this.highlighted = false;
-    }
-
-    makeTextHighlighted() {
-      this.highlighted = true;
-      this.dateChange = new Date().toLocaleString();
-    }
-  }
-  
-  const post3 = new AttachedPostES5('Anna', 'my first blog');
-  const post4 = new AttachedPostES6('Artur', 'my first idea');
-
-  console.log(post3);
-  console.log(post4);
-
-  post3.makeTextHighlighted();
-  post4.makeTextHighlighted();
-
-  console.log(post3);
-  console.log(post4);
 </script>
 </body>
-</html>
+</html>   
