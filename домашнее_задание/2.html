@@ -68,10 +68,10 @@
     должно моментально отображаться в span. То есть при печати в input'е тег span
     также должен меняться.
     */
+    const spanEl = document.querySelector('span');
     document.getElementById('from').addEventListener('input', (event) => {
-      console.log(document.querySelector('span')
-        .textContent = event.target.value);
-    })
+      spanEl.textContent = event.target.value;
+    });
 
     /*
     2. При клике на кнопку с классом messageBtn необходимо элементу с классом
@@ -79,11 +79,11 @@
     1) добавить два класса: animate__animated и animate__fadeInLeftBig
     2) поставить данному элементу стиль visibility в значение 'visible'.
      */
+    const messageEl = document.querySelector('.message');
     document.querySelector('.messageBtn').addEventListener('click', event => {
-      document.querySelector('.message').classList.add('animate__animated');
-      document.querySelector('.message').classList.add('animate__fadeInLeftBig');
-      document.querySelector('.message').style.visibility = 'visible';
-    })
+      messageEl.classList.add('animate__animated', 'animate__fadeInLeftBig');
+      messageEl.style.visibility = 'visible';
+    });
 
     /*
     3. Необходимо при отправке формы проверить, заполнены ли все поля в этой
@@ -96,9 +96,10 @@
     данному полю).
     Если поле было чем-либо заполнено, подсветку (класс error) необходимо убрать.
      */
+    const formContrEl = document.querySelectorAll('.form-control');
     document.querySelector('form').addEventListener('submit', event => {
-      document.querySelectorAll('.form-control').forEach(el => {
-        if (el.value == "") {
+      formContrEl.forEach(el => {
+        if (el.value === "") {
           event.preventDefault();
           el.classList.add('error');
         }
@@ -106,7 +107,9 @@
     });
 
     document.querySelector('form').addEventListener('input', event => {
-      if (event.target.value !== "") {
+      if (event.target.value === "") {
+        event.target.classList.add('error');
+      } else {
         event.target.classList.remove('error');
       }
     });

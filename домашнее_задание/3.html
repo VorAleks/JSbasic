@@ -46,31 +46,26 @@
     1. При наведении на любую из звезд, данной звезде должен ставиться класс
     golden, также такой класс должен ставиться всем звездам до нее слева.
     */
+    const handler = method => event => {
+      if (event.target.classList.contains("fa-star")) {
+        let star = event.target;
+        do {
+          star.classList[method]('golden');
+          star = star.previousElementSibiling;
+        } while (star)
+      }
+    };
+
+
     const starsCont = document.querySelector('.stars_container');
     const stars = document.querySelectorAll('.fa-star');
-    starsCont.addEventListener('mouseover', event => {
-      if (event.target.tagName === "I") {
-        stars.forEach(star => star.classList.remove('golden'));
-        let i = 0;
-        do {
-          stars[i].classList.add('golden');
-        } while (event.target !== stars[i++])
-      }
-    });
+    starsCont.addEventListener('mouseover', handler('add'));
 
     /*
     2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
     задания должны быть удалены.
      */
-    starsCont.addEventListener('mouseout', event => {
-      if (event.target.tagName === "I") {
-        let i = 0;
-        do {
-
-          stars[i].classList.remove('golden');
-        } while (event.target !== stars[i++])
-      }
-    });
+    starsCont.addEventListener('mouseout', handler('remove'));
 
     /*
     3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
@@ -84,22 +79,12 @@
     // mouseover, все гасим а потом включаем. Все плавно. А как выключаем, когда
     // со звезд уходим? событие на ДИВ. и пришлсь размер див контейнера по длине
     // звезд делать. Иначе когда мышку вправо до конца экрана - не гаснут)) .
-    // const starsCont = document.querySelector('.stars_container');
-    // const stars = document.querySelectorAll('.fa-star');
-    // starsCont.addEventListener('mouseover', event => {
-    //   if (event.target.tagName === "I") {
-    //     stars.forEach(star => star.classList.remove('golden'));
-    //     let i = 0;
-    //     do {
-    //       stars[i].classList.add('golden');
-    //     } while (event.target !== stars[i++])
-    //   }
-    // });
-    // starsCont.addEventListener('mouseout', event => {
-    //   if (event.relatedTarget.tagName !== "DIV") {
-    //     stars.forEach(star => star.classList.remove('golden'));
-    //   }
-    // });
+
+    starsCont.childNodes.forEach(child => {
+      if (child.nodeName === "#text")
+        child.remove();
+    });
+
 
   </script>
 </body>
