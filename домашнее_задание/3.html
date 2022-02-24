@@ -3,89 +3,43 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document6.3</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-    crossorigin="anonymous" />
-  <style>
-    i {
-      font-size: 50px;
-    }
-
-    .golden {
-      color: gold;
-    }
-
-    .stars_container {
-      width: 300px;
-    }
-  </style>
+  <title>Homework7.3</title>
 </head>
 
 <body>
   <!--
-Обязательное задание.
+Необязательное задание.
 
-Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
-стирать, код с решением задачи пишем под комментарием.
+Ваша задача - создать функцию, которая может принимать любое неотрицательное
+целое число в качестве аргумента и возвращать число с теми же цифрами, но в
+порядке убывания.
+Если проще - переставьте цифры, чтобы получить максимально возможное число из
+данного набора цифр.
 -->
-
-  <div class="stars_container">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-  </div>
-
   <script>
     "use strict";
 
-    /*
-    1. При наведении на любую из звезд, данной звезде должен ставиться класс
-    golden, также такой класс должен ставиться всем звездам до нее слева.
-    */
-    const handler = method => event => {
-      if (event.target.classList.contains("fa-star")) {
-        let star = event.target;
-        do {
-          star.classList[method]('golden');
-          star = star.previousElementSibiling;
-        } while (star)
-      }
-    };
-
-
-    const starsCont = document.querySelector('.stars_container');
-    const stars = document.querySelectorAll('.fa-star');
-    starsCont.addEventListener('mouseover', handler('add'));
-
-    /*
-    2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
-    задания должны быть удалены.
+    /**
+     * Функция перемещает цифры получая наибольшее число.
+     * @param {number} n - Число, из цифр которого нужно составить наибольшее
+     * возможное число с теми же цифрами.
+     * @returns {number} - Набольшее число из набора цифр числа, переданного в
+     * параметр "n"
      */
-    starsCont.addEventListener('mouseout', handler('remove'));
+    function descendingOrder(n) {
+      let numArr = [];
+      let result = '';
+      for (let i = 0; i < n.toString().length; i++) {
+        numArr.push(n.toString().charAt(i));
+      }
+      numArr.sort((a, b) => b - a);
+      numArr.forEach(num => result += num);
+      return result;
+    }
 
-    /*
-    3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
-    звезды (временно могут становиться черными). Почему так? Напишите словами.
-    Можем ли мы это исправить? Если да, то предложите решение.
-    */
-    // Первое приходит в голову для гашения - mouseout. Но при его использовании
-    // мерцание неизбежно, Сошел сл звезды - гасим свет) Это из-за того, что
-    // обработчик событий привязан на звезду. а вот если включать по звезде, а
-    // выключать по контейнеру? то есть при переходе между звездами обработываем
-    // mouseover, все гасим а потом включаем. Все плавно. А как выключаем, когда
-    // со звезд уходим? событие на ДИВ. и пришлсь размер див контейнера по длине
-    // звезд делать. Иначе когда мышку вправо до конца экрана - не гаснут)) .
-
-    starsCont.childNodes.forEach(child => {
-      if (child.nodeName === "#text")
-        child.remove();
-    });
-
-
+    console.log(descendingOrder(42145)); // 54421
+    console.log(descendingOrder(145263)); // 654321
+    console.log(descendingOrder(123456789)); // 987654321
   </script>
 </body>
 
