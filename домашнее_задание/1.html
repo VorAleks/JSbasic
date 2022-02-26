@@ -62,17 +62,17 @@
       X6: "Знаю, программирование это нелегко.",
       H99: "Однако, программирование, в итоге, принесет свои плоды.",
     };
-    const navEls = document.querySelectorAll('.nav-link');
-    document.querySelector('.nav').addEventListener('click', e => {
-      let textTag = event.target.parentNode.dataset.text;
-      document.querySelector('.text').textContent = panelText[textTag];
-      navEls.forEach(navEl => {
-        if (navEl !== event.target) {
-          navEl.classList.toggle('active', false);
-        } else {
-          navEl.classList.toggle('active', true);
-        }
-      })
+    let activeEl = document.querySelector('.active');
+    const textEl = document.querySelector('.text');
+    document.querySelector('.nav').addEventListener('click', event => {
+      if (!event.target.classList.contains('nav-link')) {
+        return;
+      }
+      activeEl.classList.remove('active');
+      event.target.classList.add('active');
+      activeEl = event.target;
+      let textTag = event.target.parentElement.dataset.text;
+      textEl.textContent = panelText[textTag];
     });
 
     /*
@@ -81,9 +81,11 @@
     шрифт у текста, никакого резкого увеличения шрифта не должно быть при
     перетаскивании ползунка.
      */
-    const inpEl = document.querySelector('[type="range"]');
-    inpEl.addEventListener('input', ev => {
-      document.getElementById('inputDiv').style.fontSize = `${inpEl.value}px`;
+    const DivEl = document.getElementById('inputDiv');
+    const inputEl = document.querySelector('[type="range"]');
+    inputEl.value = Number.parseInt(getComputedStyle(DivEl).fontSize);
+    inputEl.addEventListener('input', event => {
+      DivEl.style.fontSize = `${event.target.value}px`;
     });
 
   </script>

@@ -34,7 +34,7 @@
       }
       numArr.sort((a, b) => b - a);
       numArr.forEach(num => result += num);
-      return result;
+      return Number.parseInt(result);
     }
 
     console.log(descendingOrder(42145)); // 54421
